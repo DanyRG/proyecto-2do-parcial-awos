@@ -77,13 +77,42 @@ const app = express();
   });
   
   app.delete('/usuario/:id', function(req, res){
-      let id = req.params.id;
-  
-      res.json({
-          ok: 200,
-          mensaje: 'usuario eliminado con exito',
-          id: id
-      });
+    //   let id = req.params.id;
+
+    //   Usuario.deleteOne({ _id: id }, (err, usuarioBorrado) => {
+    //       if(err){
+    //           return res.status(400).json({
+    //               ok: false,
+    //               msg: 'Ocurrio un error al moemnto de eliminar',
+    //               err
+    //           });
+    //       }
+
+    //       res.json({
+    //           ok: true,
+    //           msg: 'Usuario eliminado con exito',
+    //           usuarioBorrado
+    //       });
+    //   });
+
+    let id = req.params.id;
+
+    Usuario.findByIdAndUpdate(id, { estado: false }, 
+        { new: true, runValidators: true, context: 'query' }, (err, usrDB) => {
+            if(err){
+                          return res.status(400).json({
+                              ok: false,
+                              msg: 'Ocurrio un error al momento de eliminar',
+                              err
+                          });
+                      }
+            
+                      res.json({
+                          ok: true,
+                          msg: 'Usuario eliminado con exito',
+                          usrDB
+                      });
+        });
   });
 
   module.exports = app;
