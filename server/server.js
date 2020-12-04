@@ -19,7 +19,7 @@ app.get('/', function (req, res) {
   app.use(require('./routes/login'));
   app.use(require('./routes/producto'));
  
-mongoose.connect('mongodb://localhost:27017/cafeteria', {
+mongoose.connect('mongodb+srv://admin:bLyy5FK9SAtXoteF@cluster0.qj7xo.mongodb.net/Cafeteria', {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true,
